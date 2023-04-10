@@ -16,7 +16,7 @@ IgniterAuth protects your website from the being accessible to the public and bo
 Run the following command to install the plugin via Composer
 
 ```sh
-composer install affilipoint.com/igniterauth
+composer require affilipoint.com/igniterauth
 ```
 
 ## How to use the plugin
