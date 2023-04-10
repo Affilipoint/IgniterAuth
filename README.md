@@ -51,3 +51,15 @@ This will discourage search bots to index your site.
 To remove the site lock authentication, simply deactivate the plugin and your site will be accessible to the public.
 
 All your settings will be saved is you choose to re-activate the plugin again.
+
+## Production environments
+
+On production environment, there is a failsafe to bypass the HTTP authentication even if the plugin is activate or activated accidentally.
+
+To enable the failsafe add the constant `WP_ENVIRONMENT` to `production` in your `wp-config.php` file.
+
+```
+define( 'WP_ENVIRONMENT', 'production' );
+```
+
+With the `production` environment defined in your config file, HTTP authentication will never be active on the production environment.
