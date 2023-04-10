@@ -52,9 +52,9 @@ $igniterAuth = new AuthClass();
 add_action( 'init', array( $igniterAuth, 'lock' ) );
 add_action( 'admin_menu', array( $igniterAuth, 'settingsMenu' ) );
 add_action( 'admin_notices', array( $igniterAuth, 'adminNoticeWarning' ), 1 );
-add_action('wp_head', array( $igniterAuth, 'noIndex') );
+add_action( 'wp_head', array( $igniterAuth, 'noIndex' ) );
 
 // Filters
-add_filter( 'plugin_action_links_igniter-auth/igniter-auth.php', array($igniterAuth, 'settingsLink') );
+add_filter( 'plugin_action_links_igniter-auth/index.php', array($igniterAuth, 'settingsLink') );
 
 // Hooks

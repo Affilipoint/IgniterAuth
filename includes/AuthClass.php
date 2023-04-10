@@ -18,6 +18,7 @@ class AuthClass
         if( WP_ENVIRONMENT != 'production' && ( ! is_user_logged_in() || !empty( $_SERVER['IGNITER_AUTH_REALM'] ) ) )
         {
             $this->authenticateUser();
+            $this->pluginSetup();
         }
     }
 
@@ -111,6 +112,11 @@ class AuthClass
             'igniter-auth-settings', 
             array(&$this, 'settingsPage')
         );
+    }
+
+    private function pluginSetup()
+    {
+        load_theme_textdomain('igniter-auth', get_template_directory() . '/i18n');
     }
 
     public function adminNoticeWarning() 
