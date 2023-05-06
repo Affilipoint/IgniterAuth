@@ -35,10 +35,6 @@ use IgniterAuth\AuthClass;
 
 ! defined( 'ABSPATH' ) ? exit : '';
 
-if( ! defined( 'WP_ENVIRONMENT' ) )
-{
-    define( 'WP_ENVIRONMENT', 'development' );
-}
 define( 'IGNITER_AUTH_VERSION', '1.1.0' );
 define( 'IGNITER_AUTH_PLUGIN_PATH', plugin_dir_path(__FILE__) );
 define( 'IGNITER_AUTH_PLUGIN_URL', plugin_dir_url(__FILE__) );

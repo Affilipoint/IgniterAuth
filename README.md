@@ -54,12 +54,8 @@ All your settings will be saved is you choose to re-activate the plugin again.
 
 ## Production environments
 
-On production environment, there is a failsafe to bypass the HTTP authentication even if the plugin is activate or activated accidentally.
+On production environment, there is a failsafe to bypass the HTTP authentication even if the plugin is active or activated accidentally.
 
-To enable the failsafe add the constant `WP_ENVIRONMENT` to `production` in your `wp-config.php` file.
+To enable the failsafe go to the plugin settings and select `Production` for the `Site environment` setting.
 
-```
-define( 'WP_ENVIRONMENT', 'production' );
-```
-
-With the `production` environment defined in your config file, HTTP authentication will never be active on the production environment.
+With the `production` environment enabled, HTTP authentication will never be active on the production environment even if the plugin is activated.

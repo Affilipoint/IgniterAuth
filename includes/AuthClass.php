@@ -15,7 +15,10 @@ class AuthClass
 
     public function lock()
     {
-        if( WP_ENVIRONMENT != 'production' && ( ! is_user_logged_in() || !empty( $_SERVER['IGNITER_AUTH_REALM'] ) ) )
+        if( 
+            get_option( 'igniter_auth_env', 'production' ) != 'production' 
+            && ( ! is_user_logged_in() || !empty( $_SERVER['IGNITER_AUTH_REALM'] ) ) 
+        )
         {
             $this->authenticateUser();
             $this->pluginSetup();
@@ -123,7 +126,14 @@ class AuthClass
     {
         $class = 'notice notice-warning';
         $message = __( '<b>IgniterAuth is Active!</b> This site is not accessible to the public.', 'igniter-auth' );
-        $message .= ' <a href="' . admin_url( 'plugins.php' ) . '">' . __( 'Deactivate', 'igniter-auth' ) . '</a>';
+
+        if( get_option( 'igniter_auth_env', 'production' ) == 'production' )
+        {
+            $message = __( '<b>IgniterAuth: Site environment is set to Production!</b> Authentication is disabled and site is accesible to the public.', 'igniter-auth' );
+        }
+
+        $message .= ' <a href="' . admin_url( 'admin.php?page=igniter-auth-settings' ) . '">' . __( 'Settings', 'igniter-auth' ) . '</a>';
+        $message .= ' | <a href="' . admin_url( 'plugins.php' ) . '">' . __( 'Deactivate', 'igniter-auth' ) . '</a>';
     
         printf( '<div class="%1$s" style="margin-left: 2px;"><p>%2$s</p></div>', esc_attr( $class ), ( $message ) );
     }
@@ -134,6 +144,7 @@ class AuthClass
         $username = get_option( 'igniter_auth_username', '' );
         $password = get_option( 'igniter_auth_password', '' );
         $noindex = get_option( 'igniter_auth_noindex', 'Y' );
+        $environment = get_option( 'igniter_auth_env', 'production' );
 
         if( !empty( $password ) )
         {
@@ -146,11 +157,13 @@ class AuthClass
         {
             $authType = ( in_array( $_POST['igniter_auth_method'], array( 'wp', 'custom' ) ) ? $_POST['igniter_auth_method'] : 'wp' );
             $noindex = ( in_array( $_POST['igniter_auth_noindex'], array( 'Y', 'N' ) ) ? $_POST['igniter_auth_noindex'] : 'Y' );
+            $environment = ( in_array( $_POST['igniter_auth_env'], array( 'production', 'staging', 'development' ) ) ? $_POST['igniter_auth_env'] : 'production' );
             $username = sanitize_user( $_POST['igniter_auth_username'] );
             $password = sanitize_text_field( $_POST['igniter_auth_password'] );
 
             update_option( 'igniter_auth_method', $authType );
             update_option( 'igniter_auth_noindex', $noindex );
+            update_option( 'igniter_auth_env', $environment );
             update_option( 'igniter_auth_username', $username );
             update_option( 'igniter_auth_password', $this->encrypt( $password ) );
 
