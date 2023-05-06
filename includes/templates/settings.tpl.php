@@ -7,17 +7,6 @@
     <table class="form-table" role="presentation">
         <tbody>
             <tr>
-                <th scope="row"><?php _e( "Site environment", 'igniter-labs' );?></th>
-                <td>
-                <select name="igniter_auth_env" id="igniter_auth_env">
-                    <option value="production" <?php echo $environment == 'production' ? 'selected="selected"': '';?>><?php _e( 'Production', 'igniter-auth' );?></option>
-                    <option value="staging" <?php echo $environment == 'staging' ? 'selected="selected"': '';?>><?php _e( 'Staging', 'igniter-auth' );?></option>
-                    <option value="development" <?php echo $environment == 'development' ? 'selected="selected"': '';?>><?php _e( 'Development', 'igniter-auth' );?></option>
-                </select>
-                <div style="margin-top:5px;"><small><?php _e( '<strong>Note:</strong> Authentication is active only when site is <strong>NOT</strong> in production mode', 'igniter-auth' );?></small></div>
-                </td>
-            </tr>
-            <tr>
                 <th scope="row"><?php _e( 'Authenticate users', 'igniter-auth' );?></th>
                 <td>
                     <fieldset>
